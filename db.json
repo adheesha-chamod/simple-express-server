@@ -3,22 +3,14 @@
     {
       "name": "Saman",
       "email": "saman@example.com",
+      "password": "12345678",
       "id": 1
-    },
-    {
-      "name": "Bob",
-      "email": "bob@example.com",
-      "id": 2
-    },
-    {
-      "name": "Alice",
-      "email": "alice@example.com",
-      "id": 3
     },
     {
       "name": "Kamal",
       "email": "kamal@example.com",
-      "id": 4
+      "password": "12345678",
+      "id": 2
     }
   ]
 }
