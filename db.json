@@ -1,12 +1,6 @@
 {
   "users": [
     {
-      "name": "Saman",
-      "email": "saman@example.com",
-      "password": "12345678",
-      "id": 1
-    },
-    {
       "name": "Kamal",
       "email": "kamal@example.com",
       "password": "12345678",
