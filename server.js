@@ -5,11 +5,13 @@ import cors from "cors";
 const app = express();
 const PORT = 5000;
 const JSON_SERVER_URL = "http://localhost:8000";
+const API_VERSION = "/api/v1";
 
 app.use(express.json());
-app.use(cors()); // Enable CORS for cross-origin requests
+app.use(cors());
 
-app.get("/api/v1/users", async (req, res) => {
+// Get all users
+app.get(`${API_VERSION}/users`, async (req, res) => {
   try {
     const response = await axios.get(`${JSON_SERVER_URL}/users`);
     const users = response.data;
@@ -19,26 +21,29 @@ app.get("/api/v1/users", async (req, res) => {
   }
 });
 
-app.get("/api/v1/users/:id", async (req, res) => {
+// Get a specific user by ID
+app.get(`${API_VERSION}/users/:id`, async (req, res) => {
   const userId = req.params.id;
   try {
     const response = await axios.get(`${JSON_SERVER_URL}/users/${userId}`);
     const user = response.data;
-    res.status(200).json(user);
+    if (!user || Object.keys(user).length === 0) {
+      res.status(404).json({ message: "No user found" });
+    } else {
+      res.status(200).json(user);
+    }
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
 });
 
-app.post("/api/v1/users", async (req, res) => {
+// Add a new user
+app.post(`${API_VERSION}/users`, async (req, res) => {
   const newUser = req.body;
   try {
-    // const response = await axios.post(`${JSON_SERVER_URL}/users`, newUser);
-    // const addedUser = response.data;
-    // res.status(201).json(addedUser);
-
     const response = await axios.post(`${JSON_SERVER_URL}/users`, newUser);
-    res.status(201).json({ message: "User added successfully" });
+    const addedUser = response.data;
+    res.status(201).json(addedUser);
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
