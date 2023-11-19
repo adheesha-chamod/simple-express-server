@@ -1,0 +1,4 @@
+npm run server
+npm run json-server
+
+npm run dev
